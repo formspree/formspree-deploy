@@ -12,20 +12,34 @@ const readConfigFromFile = file => {
   }
 };
 
-const parseConfig = rawConfig => {
-  return JSON.parse(rawConfig);
-};
-
+/**
+ * Fetches the raw configuration provided via args or from the config file.
+ *
+ * @param {object} args
+ * @returns {string}
+ */
 const getRawConfig = args => {
   if (args.config) return args.config;
-  return readConfigFromFile(args.file);
+  const file = args.file || 'statickit.json';
+  return readConfigFromFile(file);
 };
 
+/**
+ * Fetches the deploy key from the given args or from environment variables.
+ *
+ * @param {object} args
+ */
 const getDeployKey = args => {
   if (args.key) return args.key;
   return process.env.STATICKIT_DEPLOY_KEY;
 };
 
+/**
+ * Executes a deployment.
+ *
+ * @param {object} args
+ * @returns {Promise}
+ */
 const deploy = args => {
   const { userAgent, key, config } = args;
   const endpoint = args.endpoint || 'https://api.statickit.com';
@@ -42,4 +56,4 @@ const deploy = args => {
   });
 };
 
-module.exports = { getDeployKey, getRawConfig, parseConfig, deploy };
+module.exports = { getDeployKey, getRawConfig, deploy };
