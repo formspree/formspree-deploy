@@ -15,6 +15,9 @@
   },
   "license": "MIT",
   "author": "Derrick Reimer",
+  "files": [
+    "src/*"
+  ],
   "main": "index.js",
   "scripts": {
     "release": "np",
@@ -48,6 +51,9 @@
   },
   "engines": {
     "node": ">= 8"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "np": {
     "yarn": false
