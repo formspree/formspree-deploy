@@ -42,6 +42,11 @@ const getDeployKey = args => {
  */
 const deploy = args => {
   const { userAgent, key, config } = args;
+
+  if (!userAgent) throw new Error('userAgent is required');
+  if (!key) throw new Error('key is required');
+  if (!config) throw new Error('config is required');
+
   const endpoint = args.endpoint || 'https://api.statickit.com';
 
   return axios({
