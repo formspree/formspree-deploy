@@ -1,7 +1,15 @@
 const axios = require('axios');
-const { deploy } = require('../src');
+const { deploy, getRawConfig, getDeployKey } = require('../src');
 
 jest.mock('axios');
+
+jest.mock('process', () => ({
+  env: {
+    STATICKIT_DEPLOY_KEY: 'yyy'
+  }
+}));
+
+jest.mock('fs');
 
 describe('deploy', () => {
   it('should execute a request with args', () => {
@@ -69,5 +77,41 @@ describe('deploy', () => {
     } catch (e) {
       expect(e.message).toBe('config is required');
     }
+  });
+});
+
+describe('getRawConfig', () => {
+  it('should return the `config` arg if present', () => {
+    expect(getRawConfig({ config: '{}' })).toBe('{}');
+  });
+
+  it('should return null if there is no config file', () => {
+    expect(getRawConfig({})).toBe(null);
+  });
+
+  it('should return the contents of the config file', () => {
+    require('fs').__setMockFiles({
+      'statickit.json': '{}'
+    });
+
+    expect(getRawConfig({})).toBe('{}');
+  });
+
+  it('should return the contents of the config file path given', () => {
+    require('fs').__setMockFiles({
+      'statickit-custom.json': '{}'
+    });
+
+    expect(getRawConfig({ file: 'statickit-custom.json' })).toBe('{}');
+  });
+});
+
+describe('getDeployKey', () => {
+  it('should return the `key` arg if present', () => {
+    expect(getDeployKey({ key: 'xxx' })).toBe('xxx');
+  });
+
+  it('should return the key from env', () => {
+    expect(getDeployKey({})).toBe('yyy');
   });
 });

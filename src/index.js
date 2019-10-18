@@ -1,6 +1,17 @@
 const axios = require('axios');
+const fs = require('fs');
+const env = require('process').env;
 
-const readConfigFromFile = file => {
+/**
+ * Fetches the raw configuration provided via args or from the config file.
+ *
+ * @param {object} args
+ * @returns {string}
+ */
+const getRawConfig = args => {
+  if (args.config) return args.config;
+  const file = args.file || 'statickit.json';
+
   try {
     return fs.readFileSync(file, 'utf8');
   } catch (err) {
@@ -13,25 +24,14 @@ const readConfigFromFile = file => {
 };
 
 /**
- * Fetches the raw configuration provided via args or from the config file.
+ * Fetches the deploy key from the given args or from environment variables.
  *
  * @param {object} args
  * @returns {string}
  */
-const getRawConfig = args => {
-  if (args.config) return args.config;
-  const file = args.file || 'statickit.json';
-  return readConfigFromFile(file);
-};
-
-/**
- * Fetches the deploy key from the given args or from environment variables.
- *
- * @param {object} args
- */
 const getDeployKey = args => {
   if (args.key) return args.key;
-  return process.env.STATICKIT_DEPLOY_KEY;
+  return env.STATICKIT_DEPLOY_KEY;
 };
 
 /**
