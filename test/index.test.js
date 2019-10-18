@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { deploy, getRawConfig, getDeployKey } = require('../src');
+const { request, getRawConfig, getDeployKey } = require('../src');
 
 jest.mock('axios');
 
@@ -11,7 +11,7 @@ jest.mock('process', () => ({
 
 jest.mock('fs');
 
-describe('deploy', () => {
+describe('request', () => {
   it('should execute a request with args', () => {
     const config = { site: { name: 'My Site' } };
 
@@ -25,7 +25,7 @@ describe('deploy', () => {
       return Promise.resolve({});
     });
 
-    return deploy({
+    return request({
       key: 'xxx',
       userAgent: 'my-client',
       config: config
@@ -38,7 +38,7 @@ describe('deploy', () => {
       return Promise.resolve({});
     });
 
-    return deploy({
+    return request({
       key: 'xxx',
       userAgent: 'my-client',
       config: {},
@@ -48,7 +48,7 @@ describe('deploy', () => {
 
   it('should throw if key is not present', () => {
     try {
-      deploy({
+      request({
         userAgent: 'my-client',
         config: {}
       });
@@ -59,7 +59,7 @@ describe('deploy', () => {
 
   it('should throw if userAgent is not present', () => {
     try {
-      deploy({
+      request({
         key: 'xxx',
         config: {}
       });
@@ -70,7 +70,7 @@ describe('deploy', () => {
 
   it('should throw if config is not present', () => {
     try {
-      deploy({
+      request({
         key: 'xxx',
         userAgent: 'my-client'
       });

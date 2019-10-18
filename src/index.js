@@ -40,7 +40,7 @@ const getDeployKey = args => {
  * @param {object} args
  * @returns {Promise}
  */
-const deploy = args => {
+const request = args => {
   const { userAgent, key, config } = args;
 
   if (!userAgent) throw new Error('userAgent is required');
@@ -61,4 +61,4 @@ const deploy = args => {
   });
 };
 
-module.exports = { getDeployKey, getRawConfig, deploy };
+module.exports = { getDeployKey, getRawConfig, request };
