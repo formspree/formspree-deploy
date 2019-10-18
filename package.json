@@ -17,6 +17,7 @@
   "author": "Derrick Reimer",
   "main": "index.js",
   "scripts": {
+    "release": "np",
     "test": "jest"
   },
   "husky": {
