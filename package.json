@@ -2,35 +2,22 @@
   "name": "@statickit/deploy",
   "version": "0.1.0",
   "description": "A utility for executing StaticKit deployments",
-  "homepage": "https://github.com/unstacked/statickit-deploy#readme",
   "keywords": [
     "statickit"
   ],
-  "author": "Derrick Reimer",
-  "license": "MIT",
+  "homepage": "https://github.com/unstacked/statickit-deploy#readme",
+  "bugs": {
+    "url": "https://github.com/unstacked/statickit-deploy/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/unstacked/statickit-deploy.git"
   },
-  "bugs": {
-    "url": "https://github.com/unstacked/statickit-deploy/issues"
-  },
+  "license": "MIT",
+  "author": "Derrick Reimer",
   "main": "index.js",
-  "engines": {
-    "node": ">= 8"
-  },
   "scripts": {
     "test": "jest"
-  },
-  "dependencies": {
-    "axios": "^0.19.0"
-  },
-  "devDependencies": {
-    "husky": "^3.0.9",
-    "jest": "^24.9.0",
-    "lint-staged": "^9.4.2",
-    "np": "^5.1.1",
-    "prettier": "^1.18.2"
   },
   "husky": {
     "hooks": {
@@ -41,7 +28,25 @@
     "*.{js,css,json,md}": [
       "npx prettier --write",
       "git add"
+    ],
+    "package.json": [
+      "npx sort-package-json",
+      "git add"
     ]
+  },
+  "dependencies": {
+    "axios": "^0.19.0"
+  },
+  "devDependencies": {
+    "husky": "^3.0.9",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.4.2",
+    "np": "^5.1.1",
+    "prettier": "^1.18.2",
+    "sort-package-json": "^1.22.1"
+  },
+  "engines": {
+    "node": ">= 8"
   },
   "np": {
     "yarn": false
