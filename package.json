@@ -1,17 +1,17 @@
 {
-  "name": "@statickit/deploy",
+  "name": "@formspree/deploy",
   "version": "0.3.0",
-  "description": "A utility for executing StaticKit deployments",
+  "description": "A utility for executing Formspree deployments",
   "keywords": [
-    "statickit"
+    "formspree"
   ],
-  "homepage": "https://github.com/unstacked/statickit-deploy#readme",
+  "homepage": "https://github.com/formspree/formspree-deploy#readme",
   "bugs": {
-    "url": "https://github.com/unstacked/statickit-deploy/issues"
+    "url": "https://github.com/formspree/formspree-deploy/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/unstacked/statickit-deploy.git"
+    "url": "https://github.com/formspree/formspree-deploy.git"
   },
   "license": "MIT",
   "author": "Derrick Reimer",
@@ -53,7 +53,7 @@
     "node": ">= 8"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "restricted"
   },
   "np": {
     "yarn": false
