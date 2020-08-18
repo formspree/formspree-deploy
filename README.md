@@ -1,6 +1,6 @@
-# StaticKit Deploy [![CircleCI](https://circleci.com/gh/unstacked/statickit-deploy.svg?style=svg)](https://circleci.com/gh/unstacked/statickit-deploy)
+# Formspree Deploy Utility
 
-A node.js utility library for executing [StaticKit](https://statickit.com) deployments.
+A node.js utility library for executing [Formspree](https://formspree.io) deployments.
 
 ## Releasing
 

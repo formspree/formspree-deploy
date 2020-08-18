@@ -5,7 +5,7 @@ jest.mock('axios');
 
 jest.mock('process', () => ({
   env: {
-    STATICKIT_DEPLOY_KEY: 'yyy'
+    FORMSPREE_DEPLOY_KEY: 'yyy'
   }
 }));
 
@@ -17,9 +17,11 @@ describe('request', () => {
 
     axios.mockImplementation(params => {
       expect(params.method).toBe('post');
-      expect(params.url).toBe('https://api.statickit.com/cli/v1/deployments');
+      expect(params.url).toBe(
+        'https://formspree-cli.herokuapp.com/api/0/deployments'
+      );
       expect(params.data).toBe(config);
-      expect(params.headers['StaticKit-Deploy-Key']).toBe('xxx');
+      expect(params.headers['Authorization']).toBe('Bearer xxx');
       expect(params.headers['User-Agent']).toBe('my-client');
 
       return Promise.resolve({});
@@ -34,7 +36,7 @@ describe('request', () => {
 
   it('should use a custom endpoint', () => {
     axios.mockImplementation(params => {
-      expect(params.url).toBe('https://myendpoint.com/cli/v1/deployments');
+      expect(params.url).toBe('https://myendpoint.com/api/0/deployments');
       return Promise.resolve({});
     });
 
@@ -91,7 +93,7 @@ describe('getRawConfig', () => {
 
   it('should return the contents of the config file', () => {
     require('fs').__setMockFiles({
-      'statickit.json': '{}'
+      'formspree.json': '{}'
     });
 
     expect(getRawConfig({})).toBe('{}');
@@ -99,10 +101,10 @@ describe('getRawConfig', () => {
 
   it('should return the contents of the config file path given', () => {
     require('fs').__setMockFiles({
-      'statickit-custom.json': '{}'
+      'formspree-custom.json': '{}'
     });
 
-    expect(getRawConfig({ file: 'statickit-custom.json' })).toBe('{}');
+    expect(getRawConfig({ file: 'formspree-custom.json' })).toBe('{}');
   });
 });
 
