@@ -51,10 +51,11 @@ const request = args => {
 
   return axios({
     method: 'post',
-    url: `${endpoint}/cli/v1/deployments`,
+    url: `${endpoint}/api/0/deployments`,
     data: config,
     headers: {
-      'Formspree-Deploy-Key': key,
+      Authorization: `Bearer ${key}`,
+      'Content-Type': 'application/json',
       'User-Agent': userAgent
     },
     validateStatus: status => status < 500
