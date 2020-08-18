@@ -10,7 +10,7 @@ const env = require('process').env;
  */
 const getRawConfig = args => {
   if (args.config) return args.config;
-  const file = args.file || 'statickit.json';
+  const file = args.file || 'formspree.json';
 
   try {
     return fs.readFileSync(file, 'utf8');
@@ -31,7 +31,7 @@ const getRawConfig = args => {
  */
 const getDeployKey = args => {
   if (args.key) return args.key;
-  return env.STATICKIT_DEPLOY_KEY;
+  return env.FORMSPREE_DEPLOY_KEY;
 };
 
 /**
@@ -47,14 +47,14 @@ const request = args => {
   if (!key) throw new Error('key is required');
   if (!config) throw new Error('config is required');
 
-  const endpoint = args.endpoint || 'https://api.statickit.com';
+  const endpoint = args.endpoint || 'https://formspree-cli.herokuapp.com';
 
   return axios({
     method: 'post',
     url: `${endpoint}/cli/v1/deployments`,
     data: config,
     headers: {
-      'StaticKit-Deploy-Key': key,
+      'Formspree-Deploy-Key': key,
       'User-Agent': userAgent
     },
     validateStatus: status => status < 500
