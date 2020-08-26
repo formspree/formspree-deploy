@@ -18,7 +18,7 @@ describe('request', () => {
     axios.mockImplementation(params => {
       expect(params.method).toBe('post');
       expect(params.url).toBe(
-        'https://formspree-cli.herokuapp.com/api/0/deployments'
+        'https://formspree-react.herokuapp.com/api/0/deployments'
       );
       expect(params.data).toBe(config);
       expect(params.headers['Authorization']).toBe('Bearer xxx');

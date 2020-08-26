@@ -47,7 +47,7 @@ const request = args => {
   if (!key) throw new Error('key is required');
   if (!config) throw new Error('config is required');
 
-  const endpoint = args.endpoint || 'https://formspree-cli.herokuapp.com';
+  const endpoint = args.endpoint || 'https://formspree-react.herokuapp.com';
 
   return axios({
     method: 'post',
