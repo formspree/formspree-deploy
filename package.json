@@ -53,7 +53,7 @@
     "node": ">= 8"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "np": {
     "yarn": false
