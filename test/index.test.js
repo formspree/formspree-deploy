@@ -21,6 +21,7 @@ describe('request', () => {
         'https://formspree-react.herokuapp.com/api/0/deployments'
       );
       expect(params.data).toBe(config);
+      expect(params.params).toEqual({});
       expect(params.headers['Authorization']).toBe('Bearer xxx');
       expect(params.headers['User-Agent']).toBe('my-client');
 
@@ -31,6 +32,34 @@ describe('request', () => {
       key: 'xxx',
       userAgent: 'my-client',
       config: config
+    });
+  });
+
+  it('should send force as a query param when set', () => {
+    axios.mockImplementation(params => {
+      expect(params.params).toEqual({ force: 'true' });
+      return Promise.resolve({});
+    });
+
+    return request({
+      key: 'xxx',
+      userAgent: 'my-client',
+      config: {},
+      force: true
+    });
+  });
+
+  it('should not send force when false', () => {
+    axios.mockImplementation(params => {
+      expect(params.params).toEqual({});
+      return Promise.resolve({});
+    });
+
+    return request({
+      key: 'xxx',
+      userAgent: 'my-client',
+      config: {},
+      force: false
     });
   });
 

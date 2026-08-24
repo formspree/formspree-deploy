@@ -41,7 +41,7 @@ const getDeployKey = args => {
  * @returns {Promise}
  */
 const request = args => {
-  const { userAgent, key, config } = args;
+  const { userAgent, key, config, force } = args;
 
   if (!userAgent) throw new Error('userAgent is required');
   if (!key) throw new Error('key is required');
@@ -52,6 +52,7 @@ const request = args => {
   return axios({
     method: 'post',
     url: `${endpoint}/api/0/deployments`,
+    params: force ? { force: 'true' } : {},
     data: config,
     headers: {
       Authorization: `Bearer ${key}`,
